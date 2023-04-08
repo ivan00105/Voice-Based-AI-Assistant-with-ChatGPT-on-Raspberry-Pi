@@ -4,6 +4,8 @@ libportaudio0
 libportaudio2
 libportaudiocpp0
 portaudio19-dev
+libatlas-base-dev
+ffmpeg
 flac
 requests
 websockets
