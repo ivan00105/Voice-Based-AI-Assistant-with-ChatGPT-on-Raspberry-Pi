@@ -35,11 +35,11 @@ pip install -r requirements.txt
 ```
 
 ## Configuration
-Before running the project, you need to create a config.py file in the `src` directory with your API keys. Use the provided `config_example.py` as a template and fill in the necessary information.
+Before running the project, you need to create a `config.py` file in the `src` directory with your API keys. Use the provided `config_example.py` as a template and fill in the necessary information.
 ### PicoVoice Access Key
-Get your PicoVoice access key from the PicoVoice Console. Add the access key to the config.py file.
+Get your PicoVoice access key from the [PicoVoice Console](https://picovoice.ai/ "PicoVoice Console"). Add the access key to the `config.py` file.
 ### BING API
-This project uses an unofficial BING API from EdgeGPT. To generate a cookies.json file for use with the BING API, follow the instructions in the EdgeGPT repository.<br />
+This project uses an unofficial BING API from [EdgeGPT](https://github.com/acheong08/EdgeGPT "EdgeGPT"). To generate a cookies.json file for use with the BING API, follow the instructions in the EdgeGPT repository.<br />
 Once you have your config.py and cookies.json files ready, you can proceed with running the project.
 
 ## Usage
