@@ -7,21 +7,39 @@ class Lighting:
         self.sense.clear()
 
     def load_state(self):
-        for angle in range(0, 361, 90):
-            if angle == 360:
-                angle = 0
-            self.sense.set_rotation(angle)
-            self.sense.show_letter("O", text_colour=[0, 255, 0])
-            time.sleep(0.25)
+        colors = [
+            [255, 0, 0],
+            [255, 165, 0],
+            [255, 255, 0],
+            [0, 128, 0],
+            [0, 0, 255],
+            [75, 0, 130],
+            [238, 130, 238],
+        ]
+
+        for i in range(7):
+            self.sense.clear()
+            for j in range(8):
+                self.sense.set_pixel(j, i, colors[i])
+                self.sense.set_pixel(j, 7 - i, colors[i])
+                time.sleep(0.05)
+
+        time.sleep(1)
         self.sense.clear()
 
     def listening_state(self):
-        for angle in range(0, 361, 90):
-            if angle == 360:
-                angle = 0
-            self.sense.set_rotation(angle)
-            self.sense.show_letter("L", text_colour=[0, 0, 255])
-            time.sleep(0.25)
+        colors = [
+            [0, 0, 255],
+            [0, 128, 0],
+        ]
+
+        for i in range(10):
+            self.sense.clear()
+            for j in range(8):
+                self.sense.set_pixel(j, j, colors[i % 2])
+                self.sense.set_pixel(7 - j, j, colors[i % 2])
+            time.sleep(0.5)
+
         self.sense.clear()
 
     def close(self):
