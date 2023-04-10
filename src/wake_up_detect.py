@@ -60,7 +60,7 @@ async def wake_up_detect():
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
                     gpt_result, bing_result = await asyncio.wait_for(
                         asyncio.gather(gpt(query, lang), bing(query)),
-                        timeout=30  # Set a timeout in seconds
+                        timeout=30
                     )
                 except asyncio.TimeoutError:
                     print("Request timed out. Retrying...")
