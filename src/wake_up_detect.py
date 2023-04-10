@@ -51,7 +51,7 @@ async def wake_up_detect():
             keyword_index = porcupine.process(pcm)
             if keyword_index >= 0:
                 #play wake up sound
-                os.system(f"start wake_up_sound.wav")
+                os.system(f"aplay wake_up_sound.wav")
                 print("Hey Ras Pi detected! Recognizing speech...")
                 query, lang = recognize_speech()
 
