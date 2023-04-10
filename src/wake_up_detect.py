@@ -3,6 +3,7 @@ import asyncio
 import pyaudio
 import struct
 import sys
+import os
 import signal
 from src.speech_to_text import recognize_speech
 from src.text_to_speech import text_to_speech
@@ -49,11 +50,22 @@ async def wake_up_detect():
             pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
             keyword_index = porcupine.process(pcm)
             if keyword_index >= 0:
+                #play wake up sound
+                os.system(f"start wake_up_sound.wav")
                 print("Hey Ras Pi detected! Recognizing speech...")
                 query, lang = recognize_speech()
 
-                # Call gpt() and bing() concurrently
-                gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
+                try:
+                    # Call gpt() and bing() concurrently
+                    # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
+                    gpt_result, bing_result = await asyncio.wait_for(
+                        asyncio.gather(gpt(query, lang), bing(query)),
+                        timeout=30  # Set a timeout in seconds
+                    )
+                except asyncio.TimeoutError:
+                    print("Request timed out. Retrying...")
+                    continue
+
                 gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
                 print("BING: ",bing_result)
                 print("GPT: ", gpt_result)
