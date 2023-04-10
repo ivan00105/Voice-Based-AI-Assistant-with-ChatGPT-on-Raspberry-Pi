@@ -59,6 +59,7 @@ async def wake_up_detect():
                     text_to_speech("Let me think about it. Please wait for a while","en","seaching.wav")
                 else:
                     text_to_speech("請給點時間我想一想","en","seaching.wav")
+
                 try:
                     # Call gpt() and bing() concurrently
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
