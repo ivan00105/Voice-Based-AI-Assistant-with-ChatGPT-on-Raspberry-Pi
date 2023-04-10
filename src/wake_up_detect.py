@@ -58,7 +58,7 @@ async def wake_up_detect():
                 if lang == "en-US":
                     text_to_speech("Let me think about it. Please wait for a while","en","seaching.wav")
                 else:
-                    text_to_speech("請給點時間我想一想","en","seaching.wav")
+                    text_to_speech("請給點時間我想一想","yue-HK","seaching.wav")
 
                 try:
                     # Call gpt() and bing() concurrently
