@@ -7,4 +7,3 @@ googletrans==4.0.0-rc1
 gtts
 protobuf<3.21.0
 EdgeGPT
-playsound
