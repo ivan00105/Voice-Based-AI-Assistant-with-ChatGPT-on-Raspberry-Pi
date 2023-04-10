@@ -17,14 +17,12 @@ class Lighting:
             [238, 130, 238],
         ]
 
-        for rotation in [0, 90, 180, 270]:
+        for i in range(24):
             self.sense.clear()
-            for i in range(8):
-                self.sense.set_pixel(i, 0, colors[i % len(colors)])
-            self.sense.set_rotation(rotation)
-            time.sleep(0.2)
+            for j in range(8):
+                self.sense.set_pixel(j, (i + j) % 8, colors[j % len(colors)])
+            time.sleep(0.1)
 
-        time.sleep(1)
         self.sense.clear()
 
     def listening_state(self):
@@ -36,8 +34,11 @@ class Lighting:
         for i in range(10):
             self.sense.clear()
             for j in range(8):
-                self.sense.set_pixel(j, 4, colors[i % 2])
-                self.sense.set_pixel(4, j, colors[(i + 1) % 2])
+                color = colors[i % 2]
+                self.sense.set_pixel(j, 3, color)
+                self.sense.set_pixel(j, 4, color)
+                self.sense.set_pixel(3, j, color)
+                self.sense.set_pixel(4, j, color)
             time.sleep(0.5)
 
         self.sense.clear()
@@ -48,7 +49,7 @@ class Lighting:
 if __name__ == "__main__":
     lighting = Lighting()
     lighting.load_state()
-    time.sleep(2)
+    time.sleep(5)
     lighting.listening_state()
-    time.sleep(2)
+    time.sleep(5)
     lighting.close()
