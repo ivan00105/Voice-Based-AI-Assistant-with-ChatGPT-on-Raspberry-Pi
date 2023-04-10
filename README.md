@@ -81,3 +81,5 @@ python main.py
     ├── ./src/translator.py
     └── ./src/wake_up_detect.py
 ```
+## Sample Output
+![image](https://user-images.githubusercontent.com/49149560/230957752-df775470-8911-4e88-b1d0-a5e4e23e4347.png)
