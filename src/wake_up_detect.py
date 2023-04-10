@@ -65,7 +65,7 @@ async def wake_up_detect():
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
                     gpt_result, bing_result = await asyncio.wait_for(
                         asyncio.gather(gpt(query, lang), bing(query)),
-                        timeout=30
+                        timeout=45
                     )
                 except asyncio.TimeoutError:
                     print("Request timed out. Retrying...")
@@ -74,7 +74,7 @@ async def wake_up_detect():
                 gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
                 print("BING: ",bing_result)
                 print("GPT: ", gpt_result)
-                response = bing_result if "IDK" in gpt_result or "Sorry" in gpt_result or "s an AI language model" in gpt_result else gpt_result
+                response = bing_result if "IDK" in gpt_result or "Sorry" in gpt_result or "sorry" in gpt_result  or "s an AI language model" in gpt_result else gpt_result
 
                 #translate to the voice input language
                 if lang != "en-US" and response != bing_result:
