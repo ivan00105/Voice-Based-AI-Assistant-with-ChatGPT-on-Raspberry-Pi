@@ -17,11 +17,13 @@ class Lighting:
             [238, 130, 238],
         ]
 
-        for i in range(7):
+        for i in range(8):
             self.sense.clear()
-            for j in range(8):
-                self.sense.set_pixel(j, i, colors[i])
-                self.sense.set_pixel(j, 7 - i, colors[i])
+            for color in colors:
+                self.sense.set_pixel(i, i, color)
+                self.sense.set_pixel(7 - i, i, color)
+                self.sense.set_pixel(i, 7 - i, color)
+                self.sense.set_pixel(7 - i, 7 - i, color)
                 time.sleep(0.05)
 
         time.sleep(1)
@@ -38,6 +40,8 @@ class Lighting:
             for j in range(8):
                 self.sense.set_pixel(j, j, colors[i % 2])
                 self.sense.set_pixel(7 - j, j, colors[i % 2])
+                self.sense.set_pixel(j, 7 - j, colors[(i + 1) % 2])
+                self.sense.set_pixel(7 - j, 7 - j, colors[(i + 1) % 2])
             time.sleep(0.5)
 
         self.sense.clear()
@@ -48,7 +52,7 @@ class Lighting:
 if __name__ == "__main__":
     lighting = Lighting()
     lighting.load_state()
-    time.sleep(2)
+    time.sleep(5)
     lighting.listening_state()
-    time.sleep(2)
+    time.sleep(5)
     lighting.close()
