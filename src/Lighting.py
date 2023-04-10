@@ -2,7 +2,7 @@ from sense_hat import SenseHat
 import time
 import numpy as np
 import time
-from src.ect import ect
+from ect import ect
 from random import randint
 import sys
 
