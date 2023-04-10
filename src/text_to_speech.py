@@ -1,8 +1,8 @@
 from gtts import gTTS
-import os
+from playsound import playsound
 
 def text_to_speech(text, language):
     tts = gTTS(text, lang=language)
-    filename = f"output.wav"
+    filename = "output.wav"
     tts.save(filename)
-    os.system(f"aplay {filename}")
+    playsound(filename)
