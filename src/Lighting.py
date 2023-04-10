@@ -1,5 +1,5 @@
 from sense_hat import SenseHat
-from time import sleep
+import time
 
 class Lighting:
     def __init__(self):
@@ -7,30 +7,30 @@ class Lighting:
         self.sense.clear()
 
     def load_state(self):
-        self.sense.clear()
-        for angle in range(0, 360, 45):
+        for angle in range(0, 361, 90):
+            if angle == 360:
+                angle = 0
             self.sense.set_rotation(angle)
-            self.sense.set_pixel(3, 0, 255, 255, 255)
-            sleep(0.1)
-            self.sense.clear()
+            self.sense.show_letter("O", text_colour=[0, 255, 0])
+            time.sleep(0.25)
+        self.sense.clear()
 
     def listening_state(self):
-        self.sense.clear()
-        for angle in range(0, 360, 45):
+        for angle in range(0, 361, 90):
+            if angle == 360:
+                angle = 0
             self.sense.set_rotation(angle)
-            self.sense.set_pixel(0, 3, 0, 255, 0)
-            sleep(0.1)
-            self.sense.clear()
+            self.sense.show_letter("L", text_colour=[0, 0, 255])
+            time.sleep(0.25)
+        self.sense.clear()
 
     def close(self):
         self.sense.clear()
-# Example usage:
-lighting = Lighting()
 
-lighting.load_state()
-sleep(2)
-
-lighting.listening_state()
-sleep(2)
-
-lighting.close()
+if __name__ == "__main__":
+    lighting = Lighting()
+    lighting.load_state()
+    time.sleep(2)
+    lighting.listening_state()
+    time.sleep(2)
+    lighting.close()

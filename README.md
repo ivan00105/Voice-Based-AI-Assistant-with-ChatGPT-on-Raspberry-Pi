@@ -45,6 +45,12 @@ This project uses an unofficial BING API from [EdgeGPT](https://github.com/acheo
 Once you have your config.py and cookies.json files ready, you can proceed with running the project.
 ### Audio setup
 Refer to https://www.youtube.com/watch?v=vEMzN5RgXbw&ab_channel=AssemblyAI
+### Missing the module 'RTIMU'
+```bash
+git clone https://github.com/RPi-Distro/RTIMULib.git
+cd RTIMULib/Linux/python
+python setup.py install
+```
 
 ## Usage
 1. Run the main script:
