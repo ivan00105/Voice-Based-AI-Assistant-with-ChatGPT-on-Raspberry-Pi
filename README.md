@@ -1,5 +1,5 @@
 # Voice-Based-AI-Assistant-with-ChatGPT-on-Raspberry-Pi
-This project is an implementation of a voice-based AI assistant using OpenAI's ChatGPT and Bing on a Raspberry Pi. The assistant listens for the wake word "Hey Ras Pi" and then processes the user's query, providing an appropriate response. The project demonstrates how to integrate multiple language models and APIs to create a more robust AI assistant.
+This project is an implementation of a voice-based AI assistant using OpenAI's ChatGPT and Bing on a Raspberry Pi. The assistant listens for the wake word "Hey Ras Pi" and then processes the user's query, providing an appropriate response. The project demonstrates how to integrate multiple language models and APIs to create a more robust and context-aware AI assistant.
 
 ## Features
 - Wake word detection using Porcupine
@@ -7,6 +7,8 @@ This project is an implementation of a voice-based AI assistant using OpenAI's C
 - AI-based chat using ChatGPT and unoffical Bing APIs
 - Multilingual support for English, Mandarin, and Cantonese
 - Text-to-Speech using Google Text-to-Speech (gTTS)
+- Context-Aware interactions for both ChatGPT and Bing based on conversation history
+- Time-sensitive question filtering using custom NLP function
 
 ## Installation
 1. Clone the repository
@@ -32,6 +34,7 @@ source env/bin/activate
 4. Install the required packages
 ```bash
 pip install -r requirements.txt
+python -m spacy download en_core_web_sm
 ```
 
 ## Configuration
@@ -71,11 +74,11 @@ python main.py
 ├── ./output.mp3
 ├── ./requirements.txt
 └── ./src
-    ├── ./src/__pycache__
     ├── ./src/bing.py
     ├── ./src/config.py
     ├── ./src/config_example.py
     ├── ./src/gpt.py
+    ├── ./src/nlp.py
     ├── ./src/speech_to_text.py
     ├── ./src/text_to_speech.py
     ├── ./src/translator.py
