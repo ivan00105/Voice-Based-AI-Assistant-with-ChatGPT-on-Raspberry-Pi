@@ -9,7 +9,7 @@ from src.speech_to_text import recognize_speech
 from src.text_to_speech import text_to_speech
 from src.translator import translate
 from src.config import porcupine_access_key
-from src.gpt import gpt
+from src.gpt import ChatGPT
 from src.bing import bing
 
 
@@ -61,10 +61,12 @@ async def wake_up_detect():
                     text_to_speech("請給點時間我想一想","zh","seaching.wav")
 
                 try:
+                    chat_gpt = ChatGPT()
+
                     # Call gpt() and bing() concurrently
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
                     gpt_result, bing_result = await asyncio.wait_for(
-                        asyncio.gather(gpt(query, lang), bing(query)),
+                        asyncio.gather(chat_gpt.gpt(query, lang), bing(query)),
                         timeout=45
                     )
                 except asyncio.TimeoutError:
