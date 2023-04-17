@@ -5,9 +5,15 @@ from EdgeGPT import Chatbot, ConversationStyle
 with open('./cookies.json', 'r') as f:
     cookies = json.load(f)
 
-async def bing(prompt):
-    bot = Chatbot(cookies=cookies)
-    response = await bot.ask(prompt=prompt, conversation_style=ConversationStyle.balanced, wss_link="wss://sydney.bing.com/sydney/ChatHub")
+class Bing:
+    def __init__(self):
+        self.bot = Chatbot(cookies=cookies)
+
+    async def bing(self, prompt):
+        response = await self.bot.ask(prompt=prompt, conversation_style=ConversationStyle.balanced, wss_link="wss://sydney.bing.com/sydney/ChatHub")
+        return response
+    
     # close connection
-    await bot.close()
-    return response
+    async def close(self):
+        await self.bot.close()
+        

@@ -10,7 +10,7 @@ from src.text_to_speech import text_to_speech
 from src.translator import translate
 from src.config import porcupine_access_key
 from src.gpt import ChatGPT
-from src.bing import bing
+from src.bing import Bing
 
 
 interrupted = False
@@ -27,9 +27,9 @@ async def wake_up_detect():
     #capture SIGINT signal, e.g. ctrl+C
     signal.signal(signal.SIGINT, signal_handler)
 
-    #create chatGPT object
+    #create chatGPT and Bing object
     chat_gpt = ChatGPT()
-
+    bing = Bing()
     #define the hotword model
     # keyword_path = "models/alexa_windows.ppn" #test case with "alexa" in Windows platform
     keyword_path = "models/Hey-Ras-Pi_en_raspberry-pi_v2_1_0.ppn"
