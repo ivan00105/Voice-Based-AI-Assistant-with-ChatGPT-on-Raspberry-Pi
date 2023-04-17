@@ -67,7 +67,7 @@ async def wake_up_detect():
                     # Call gpt() and bing() concurrently
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
                     gpt_result, bing_result = await asyncio.wait_for(
-                        asyncio.gather(chat_gpt.gpt(query, lang), bing(query)),
+                        asyncio.gather(chat_gpt.gpt(query, lang), bing.bing(query)),
                         timeout=45
                     )
                 except asyncio.TimeoutError:
