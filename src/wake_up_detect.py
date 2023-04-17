@@ -27,6 +27,9 @@ async def wake_up_detect():
     #capture SIGINT signal, e.g. ctrl+C
     signal.signal(signal.SIGINT, signal_handler)
 
+    #create chatGPT object
+    chat_gpt = ChatGPT()
+
     #define the hotword model
     # keyword_path = "models/alexa_windows.ppn" #test case with "alexa" in Windows platform
     keyword_path = "models/Hey-Ras-Pi_en_raspberry-pi_v2_1_0.ppn"
@@ -61,8 +64,6 @@ async def wake_up_detect():
                     text_to_speech("請給點時間我想一想","zh","seaching.wav")
 
                 try:
-                    chat_gpt = ChatGPT()
-
                     # Call gpt() and bing() concurrently
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
                     gpt_result, bing_result = await asyncio.wait_for(
