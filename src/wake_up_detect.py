@@ -11,7 +11,7 @@ from src.translator import translate
 from src.config import porcupine_access_key
 from src.gpt import ChatGPT
 from src.bing import Bing
-
+from src.nlp import is_time_sensitive
 
 interrupted = False
 
@@ -64,21 +64,26 @@ async def wake_up_detect():
                     text_to_speech("請給點時間我想一想","zh","seaching.wav")
 
                 try:
-                    # Call gpt() and bing() concurrently
+                   
                     # gpt_result, bing_result = await asyncio.gather(gpt(query, lang), bing(query))
-                    gpt_result, bing_result = await asyncio.wait_for(
-                        asyncio.gather(chat_gpt.gpt(query, lang), bing.bing(query)),
-                        timeout=45
-                    )
+                    if is_time_sensitive(query):
+                        bing_result = await asyncio.wait_for(bing.bing(query), timeout=45)
+                        response = bing_result["item"]["messages"][1]["text"]
+                        print("BING: ",bing_result)
+                    else:
+                    # Call gpt() and bing() concurrently
+                        gpt_result, bing_result = await asyncio.wait_for(
+                            asyncio.gather(chat_gpt.gpt(query, lang), bing.bing(query)),
+                            timeout=45
+                        )
+                        print("GPT: ", gpt_result)
+                        print("BING: ",bing_result)
+                        gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
+                        response = bing_result if "IDK" in gpt_result or "Sorry" in gpt_result or "sorry" in gpt_result  or "s an AI language model" in gpt_result else gpt_result
                 except asyncio.TimeoutError:
                     print("Request timed out. Retrying...")
                     continue
-
-                gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
-                print("BING: ",bing_result)
-                print("GPT: ", gpt_result)
-                response = bing_result if "IDK" in gpt_result or "Sorry" in gpt_result or "sorry" in gpt_result  or "s an AI language model" in gpt_result else gpt_result
-
+                
                 #translate to the voice input language
                 if lang != "en-US" and response != bing_result:
                     response = translate(response,"zh-TW")
