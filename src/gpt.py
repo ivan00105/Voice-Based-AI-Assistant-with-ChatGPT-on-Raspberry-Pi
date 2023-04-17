@@ -1,8 +1,8 @@
 import os
 import openai
 import asyncio
-from translator import translate
-from config import gpt_key
+from src.translator import translate
+from src.config import gpt_key
 
 sys_content = ("Note that if you cannot answer the question or the query is about "
                    "something you do not know such as time-sensitive information(e.g. "
