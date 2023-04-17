@@ -4,10 +4,10 @@ import asyncio
 from src.translator import translate
 from src.config import gpt_key
 
-sys_content = ("Note that if you cannot answer the question or the query is about "
+sys_content = ("Note that if you cannot answer the question which is about "
                    "something you do not know such as time-sensitive information(e.g. "
-                   "today's weather/stock, .etc), you can only reply \"IDK\" in your response without other characters"
-                   "even if the question is not in English(do not say something like As an AI language model... or I'm sorry...)")
+                   "today's weather/stock, .etc), you can only reply \"IDK\" in your response without other characters."
+                   "Do not say something like As an AI language model..., I'm sorry... and etc.")
 
 class ChatGPT:
     def __init__(self):
@@ -28,7 +28,6 @@ class ChatGPT:
             model="gpt-3.5-turbo",
             messages=self.messages
         )
-        print(response['choices'][0]['message']["content"])
         self.messages.append({"role":"assistant", "content": response['choices'][0]['message']["content"]})
         return response
 
