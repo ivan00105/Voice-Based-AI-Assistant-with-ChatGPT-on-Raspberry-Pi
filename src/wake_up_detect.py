@@ -76,9 +76,9 @@ async def wake_up_detect():
                             asyncio.gather(chat_gpt.gpt(query, lang), bing.bing(query)),
                             timeout=45
                         )
+                        gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
                         print("GPT: ", gpt_result)
                         print("BING: ",bing_result)
-                        gpt_result, bing_result = gpt_result['choices'][0]['message']["content"], bing_result["item"]["messages"][1]["text"]
                         response = bing_result if "IDK" in gpt_result or "Sorry" in gpt_result or "sorry" in gpt_result  or "s an AI language model" in gpt_result else gpt_result
                 except asyncio.TimeoutError:
                     print("Request timed out. Retrying...")
