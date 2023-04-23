@@ -4,13 +4,6 @@ import spacy
 nlp = spacy.load("en_core_web_sm")
 
 def is_time_sensitive(text):
-    """
-    This function takes a text input and checks if it contains time-sensitive information.
-    It uses SpaCy's language model to identify keywords and entities related to time-sensitive information.
-    
-    :param text: A string representing the text input.
-    :return: A boolean value, True if the text contains time-sensitive information, otherwise False.
-    """
     
     #analyze the text using SpaCy
     doc = nlp(text)
